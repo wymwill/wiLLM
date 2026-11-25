@@ -21,6 +21,11 @@ docs/architecture.md for the module graph.
 * Every optimized kernel keeps a naive `kernels/ref` twin and a test comparing them.
 * Python only inside `tools/`, numpy plus torch where needed.
 
+## Branches
+* One branch per milestone or feature with a descriptive name such as
+  `m0-skeleton`, `m1-reference-forward` or `fix-mmap-empty-file`.
+* Never prefix or label branches with claude or session ids.
+
 ## Commits
 * Commit at regular intervals, batching related changes.
 * Each message is 1 to 3 plain sentences saying what was done, with no
