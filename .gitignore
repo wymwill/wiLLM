@@ -1,1 +1,23 @@
+# macOS
 .DS_Store
+
+# Build output (CMake presets put everything under build/)
+build/
+cmake-build-*/
+compile_commands.json
+.cache/
+
+# Model weights and tokenizers are downloaded by tools/, never committed
+models/
+*.bin
+*.safetensors
+*.gguf
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Editors
+.vscode/
+.idea/

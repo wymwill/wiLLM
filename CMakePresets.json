@@ -1,0 +1,42 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": { "major": 3, "minor": 25, "patch": 0 },
+    "configurePresets": [
+        {
+            "name": "debug",
+            "displayName": "Debug (ASan + UBSan)",
+            "binaryDir": "${sourceDir}/build/debug",
+            "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
+        },
+        {
+            "name": "release",
+            "displayName": "Release (-O3, native CPU)",
+            "binaryDir": "${sourceDir}/build/release",
+            "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+        },
+        {
+            "name": "ci-debug",
+            "inherits": "debug",
+            "binaryDir": "${sourceDir}/build/ci-debug",
+            "cacheVariables": { "CMAKE_COMPILE_WARNING_AS_ERROR": "ON" }
+        },
+        {
+            "name": "ci-release",
+            "inherits": "release",
+            "binaryDir": "${sourceDir}/build/ci-release",
+            "cacheVariables": { "CMAKE_COMPILE_WARNING_AS_ERROR": "ON" }
+        }
+    ],
+    "buildPresets": [
+        { "name": "debug", "configurePreset": "debug" },
+        { "name": "release", "configurePreset": "release" },
+        { "name": "ci-debug", "configurePreset": "ci-debug" },
+        { "name": "ci-release", "configurePreset": "ci-release" }
+    ],
+    "testPresets": [
+        { "name": "debug", "configurePreset": "debug", "output": { "outputOnFailure": true } },
+        { "name": "release", "configurePreset": "release", "output": { "outputOnFailure": true } },
+        { "name": "ci-debug", "configurePreset": "ci-debug", "output": { "outputOnFailure": true } },
+        { "name": "ci-release", "configurePreset": "ci-release", "output": { "outputOnFailure": true } }
+    ]
+}
