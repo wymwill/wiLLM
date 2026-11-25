@@ -16,6 +16,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 option(WILLM_BUILD_TESTS "Build the unit tests" ON)
+option(WILLM_BUILD_APPS "Build the command line apps" ON)
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 include(CompilerOptions)
@@ -23,6 +24,17 @@ include(WillmModule)
 
 # Modules, listed in dependency order. A module may only link modules above it.
 add_subdirectory(src/core)
+add_subdirectory(src/kernels)
+add_subdirectory(src/tokenizer)
+add_subdirectory(src/sampler)
+add_subdirectory(src/kv_cache)
+add_subdirectory(src/model)
+add_subdirectory(src/engine)
+add_subdirectory(src/server)
+
+if(WILLM_BUILD_APPS)
+    add_subdirectory(apps)
+endif()
 
 if(WILLM_BUILD_TESTS)
     enable_testing()
