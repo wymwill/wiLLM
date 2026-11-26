@@ -1,0 +1,22 @@
+# LLVM style with 4 space indent. Run `clang-format -i` on changed files,
+# CI checks formatting with clang-format 18 (see .github/workflows/ci.yml).
+BasedOnStyle: LLVM
+IndentWidth: 4
+ColumnLimit: 100
+AccessModifierOffset: -4
+PointerAlignment: Left
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakTemplateDeclarations: Yes
+IncludeBlocks: Regroup
+IncludeCategories:
+  # Project headers first, then third party, then the standard library.
+  - Regex: '^"willm/'
+    Priority: 1
+  - Regex: '^<doctest/'
+    Priority: 2
+  - Regex: '^<.*\.h>'
+    Priority: 3
+  - Regex: '^<'
+    Priority: 4

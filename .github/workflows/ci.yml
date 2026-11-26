@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    name: ${{ matrix.preset }} on macOS
+    runs-on: macos-15 # Apple silicon, Apple clang
+    strategy:
+      fail-fast: false
+      matrix:
+        # ci-debug runs the tests under ASan and UBSan. ci-release checks that
+        # -O3 builds are warning free and that tests still pass when optimized.
+        preset: [ci-debug, ci-release]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: cmake --preset ${{ matrix.preset }}
+      - name: Build
+        run: cmake --build --preset ${{ matrix.preset }} --parallel
+      - name: Test
+        run: ctest --preset ${{ matrix.preset }}
+
+  format:
+    name: clang-format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Pinned so local and CI formatting agree. Install the same version with
+      # `pipx install clang-format==18.1.8` (or `pip install`).
+      - name: Install clang-format
+        run: pip install clang-format==18.1.8
+      - name: Check formatting
+        run: |
+          find src apps tests -name '*.h' -o -name '*.cpp' \
+            | xargs clang-format --dry-run --Werror
