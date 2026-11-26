@@ -1,6 +1,8 @@
 willm_add_module(model
     SOURCES
         config.cpp
+        llama2c_loader.cpp
+        transformer.cpp
     DEPS
         willm::core
         willm::kernels

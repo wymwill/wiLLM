@@ -18,6 +18,14 @@ public:
     using std::logic_error::logic_error;
 };
 
+// Thrown by stubs that are still waiting to be written (see TODO(me) markers).
+// Tests that hit one fail with a clear "not implemented" message instead of
+// comparing garbage.
+class NotImplementedError : public std::logic_error {
+public:
+    using std::logic_error::logic_error;
+};
+
 namespace detail {
 [[noreturn]] void check_failed(const char* expr, const std::string& msg, const char* file,
                                int line);
