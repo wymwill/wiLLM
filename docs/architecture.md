@@ -61,7 +61,8 @@ hang off `core` as side branches.
 
 ## How a request flows (target design)
 
-This is where the milestones are heading. Today only `core` is real.
+This is where the milestones are heading. As of M1 the loader, the KV cache and
+the kernel and forward pass interfaces exist, the math is being filled in.
 
 1. **server** (M6) receives `POST /v1/completions`, puts the request in a queue,
    and the scheduler adds it to the running batch.
@@ -81,7 +82,10 @@ This is where the milestones are heading. Today only `core` is real.
 
 * Weights live in an `core::MmapFile`. The model holds `ConstTensorView`s that
   point straight into the mapping (zero copies).
-* Activations will live in an arena owned by the session (added in M1).
+* Activations live in buffers owned by the `Transformer`, allocated once at
+  construction so `forward()` never allocates. An arena can replace them when
+  batching (M6) needs many sessions.
+* The KV cache owns its K and V storage, one contiguous block each.
 * Kernels never allocate. They receive output views and write into them.
 
 Everything that owns a resource is an RAII type, and there is no global mutable state.

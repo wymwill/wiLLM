@@ -6,8 +6,9 @@ and the scheduler are hand written. It starts with Karpathy's tiny
 [stories15M](https://github.com/karpathy/llama2.c) model on the CPU, then moves
 to NEON SIMD, Apple Metal, and an OpenAI compatible server with continuous batching.
 
-**Status:** M0 (skeleton). The build, tests, CI and `core/` are in place. The
-model does not run yet.
+**Status:** M1 in progress. The checkpoint loader, KV cache, golden test data
+and kernel interfaces are in place. The reference kernels and forward pass
+are being written, so the kernel and golden tests fail until they are done.
 
 ## Build
 
@@ -31,8 +32,11 @@ Format code with `clang-format -i <files>` (CI pins clang-format 18.1.8).
 ## Run
 
 ```sh
-./build/release/apps/generate models/stories15M.bin   # M0: maps the file and prints its size
+python3 tools/download_stories15m.py                  # fetch stories15M.bin into models/
+./build/release/apps/generate models/stories15M.bin   # loads the checkpoint and prints its config
 ```
+
+Golden tests against the numpy reference are described in [tools/README.md](tools/README.md).
 
 ## Layout
 

@@ -27,3 +27,5 @@ What gets easier, what gets harder, what we will revisit.
 | [0002](0002-tensor-view.md) | Non owning tensor view with runtime dtype and element strides |
 | [0003](0003-error-handling.md) | Exceptions at boundaries, no exceptions in hot loops |
 | [0004](0004-doctest-via-fetchcontent.md) | doctest via FetchContent, header only |
+| [0005](0005-golden-tests.md) | Golden tests against a float64 numpy reference |
+| [0006](0006-format-agnostic-weights.md) | One ModelWeights struct for every checkpoint format |

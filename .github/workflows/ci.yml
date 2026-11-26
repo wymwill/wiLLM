@@ -16,6 +16,20 @@ jobs:
         preset: [ci-debug, ci-release]
     steps:
       - uses: actions/checkout@v4
+      # stories15M and its golden activations, so the stories15M golden test
+      # runs in CI too. Cached because the model never changes.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/cache@v4
+        with:
+          path: models
+          key: models-${{ hashFiles('tools/llama2c.py', 'tools/dump_golden.py', 'tools/download_stories15m.py') }}
+      - name: Prepare stories15M golden data
+        run: |
+          pip install -r tools/requirements.txt
+          python3 tools/download_stories15m.py
+          [ -f models/stories15M.golden ] || python3 tools/dump_golden.py models/stories15M.bin models/stories15M.golden
       - name: Configure
         run: cmake --preset ${{ matrix.preset }}
       - name: Build
