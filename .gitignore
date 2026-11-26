@@ -21,3 +21,6 @@ __pycache__/
 # Editors
 .vscode/
 .idea/
+
+# Small test fixtures are committed on purpose
+!tests/data/*.bin
