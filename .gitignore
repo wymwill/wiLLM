@@ -24,3 +24,6 @@ __pycache__/
 
 # Small test fixtures are committed on purpose
 !tests/data/*.bin
+
+# Personal learning notes (guides, learning log). Kept locally, never pushed.
+notes/

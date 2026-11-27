@@ -21,6 +21,12 @@ docs/architecture.md for the module graph.
 * Every optimized kernel keeps a naive `kernels/ref` twin and a test comparing them.
 * Python only inside `tools/`, numpy plus torch where needed.
 
+## What gets pushed
+* Only what the code needs: source, tests, build files, tools, CI and
+  technical docs (README, architecture, ADRs).
+* Will's personal learning material (guides, learning log, mentor notes)
+  lives in `notes/`, which is gitignored. Never commit it.
+
 ## Branches
 * One branch per milestone or feature with a descriptive name such as
   `m0-skeleton`, `m1-reference-forward` or `fix-mmap-empty-file`.

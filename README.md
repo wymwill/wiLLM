@@ -54,7 +54,7 @@ Golden tests against the numpy reference are described in [tools/README.md](tool
 | `apps/` | `generate` CLI and `bench` harness |
 | `tests/` | one doctest executable per module, golden tests from M1 |
 | `tools/` | Python reference tools (golden activations, weight download) |
-| `docs/` | [architecture](docs/architecture.md), [ADRs](docs/adr/), [learning log](docs/learning-log.md) |
+| `docs/` | [architecture](docs/architecture.md), [ADRs](docs/adr/) |
 
 ## Results
 
